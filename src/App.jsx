@@ -22,7 +22,7 @@ function App() {
             <label>Last Name: </label><input required type="text" name="lastName"/>
           </div>
         </div>
-        <button>Submit</button>
+        <button type='submit'>Submit</button>
       </form>
       {
         fullName && <div style={{marginTop: '10px'}}>
