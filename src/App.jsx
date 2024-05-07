@@ -1,33 +1,34 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [fullName, setFullName] = useState();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    const fname = data.firstName + " " + data.lastName;
+    setFullName(fname);
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Full Name Display</h1>
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div>
+            <label>First Name: </label><input required type="text" name="firstName" />
+          </div>
+          <div>
+            <label>Last Name: </label><input required type="text" name="lastName"/>
+          </div>
+        </div>
+        <button>Submit</button>
+      </form>
+      {
+        fullName && <div style={{marginTop: '10px'}}>
+          Full Name: {fullName}
+        </div>
+      }
     </>
   )
 }
